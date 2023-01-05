@@ -1,0 +1,45 @@
+.navbar {
+    padding-top: 24px;
+    padding-top: 1.5rem;
+    padding-bottom: 24px;
+    padding-bottom: 1.5rem;
+    & .logo {
+        max-width: 90px;
+    }
+    @media (max-width: 991px) {
+        & .navbar-collapse {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100vw;
+            transform: translateX(0%);
+            transition: all 0.3s ease-out;
+            &.closed {
+                transform: translateX(110%);
+            }
+        }
+    }
+    & .nav-link {
+        position: relative;
+        z-index: 2;
+        &:before {
+            content: "";
+            position: absolute;
+            bottom: 8px;
+            left: 10px;
+            width: 0;
+            height: 28%;
+            background-color: #ff2d55;
+            opacity: 0.3;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+            z-index: -3;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+        }
+        &:hover {
+            &:before {
+                width: calc(100% - 20px);
+            }
+        }
+    }
+}
