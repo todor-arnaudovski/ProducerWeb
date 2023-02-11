@@ -1,0 +1,101 @@
+.player-container {
+    margin-top: -220px;
+    & .player {
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 40px 35px -20px rgba(0, 0, 0, 0.2),
+            0 40px 35px -40px rgba(0, 0, 0, 0.1);
+        @media (min-width: 768px) {
+            max-width: 470px;
+            min-width: 400px;
+            padding-top: 120px;
+            padding-bottom: 80px;
+        }
+    }
+    & .player-bg {
+        position: absolute;
+        top: -20px;
+        right: -20px;
+        bottom: -20px;
+        left: -20px;
+        z-index: 1;
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+    }
+    & .player-thumb {
+        & img {
+            max-width: 150px;
+            max-height: 150px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2), 0 40px 35px -20px rgba(0, 0, 0, 0.3);
+        }
+    }
+    & .player-content {
+        z-index: 9;
+        position: relative;
+    }
+}
+.audio-controls {
+    & svg {
+        font-size: 40px;
+        font-size: 2.5rem;
+        cursor: pointer;
+        -webkit-transition: 0.3s;
+        transition: 0.3s;
+        &:hover {
+            -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+        }
+    }
+    & button {
+        background: transparent;
+        border: none;
+        color: #fff;
+    }
+}
+.audio-scrubber {
+    height: 2px;
+    padding: 6px 0;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    &:before {
+        content: "";
+        position: absolute;
+        top: 5px;
+        left: 0;
+        height: 2px;
+        width: 100%;
+        background: #fff;
+        z-index: 0;
+    }
+}
+.audio-scrubber-fill {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: #ff2d55;
+}
+.audio-scrubber-handle {
+    position: absolute;
+    top: -3px;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    margin-left: -8px;
+    -webkit-transition: -webkit-transform 0.3s;
+    transition: -webkit-transform 0.3s;
+    transition: transform 0.3s;
+    transition: transform 0.3s, -webkit-transform 0.3s;
+    cursor: pointer;
+}

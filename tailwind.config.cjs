@@ -20,11 +20,14 @@ module.exports = {
         },
         container: {
             center: true,
-            padding: "1.5rem",
+            padding: "1rem",
         },
         extend: {
             colors: {
                 primary: "#123123",
+            },
+            fontSize: {
+                "9xl": "12rem",
             },
         },
     },

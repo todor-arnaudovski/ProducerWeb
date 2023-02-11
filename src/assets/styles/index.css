@@ -7,3 +7,96 @@
 * {
     font-family: "Raleway", sans-serif;
 }
+.bg-img {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.bg-fade-top {
+    position: relative;
+}
+.bg-fade-top:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 50%;
+    left: 0;
+    background: rgb(255, 255, 255);
+    background: -webkit-linear-gradient(
+        top,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+.dash-left {
+    position: relative;
+    padding-left: 40px;
+}
+.dash-left:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    min-width: 30px;
+    height: 3px;
+    background-color: #000;
+}
+.line-y-dark,
+.line-y-white {
+    position: relative;
+    padding-top: 80px;
+    margin-bottom: 40px;
+}
+.line-y-dark:before,
+.line-y-white:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 60px;
+    background-color: #000;
+}
+.line-y-white:before {
+    background-color: #fff !important;
+}
+.animated-background {
+    font-weight: 700;
+    line-height: 1;
+    background-size: auto 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: shine 8s linear infinite;
+    animation: shine 8s linear infinite;
+}
+@-webkit-keyframes shine {
+    from {
+        background-position: center 0;
+    }
+    to {
+        background-position: center 200%;
+    }
+}
+@keyframes shine {
+    from {
+        background-position: center 0;
+    }
+    to {
+        background-position: center 200%;
+    }
+}
+@media (min-width: 992px) {
+    .line-y-dark,
+    .line-y-white {
+        position: relative;
+        padding-top: 120px;
+        margin-bottom: 60px;
+    }
+    .line-y-dark:before,
+    .line-y-white:before {
+        height: 100px;
+    }
+}
