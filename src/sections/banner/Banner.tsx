@@ -1,11 +1,10 @@
 import Background from "../../assets/images/header-background-3.jpg";
-import useNavbarHeight from "../../hooks/useNavbarHeight";
 
-export const Banner = () => {
-    const height = useNavbarHeight();
+export const Banner = (props: { spacingTop: number }) => {
+    const { spacingTop } = props;
 
     return (
-        <section className="py-36" style={{ marginTop: `${height}px` }}>
+        <section className="py-36" style={{ marginTop: `${spacingTop}px` }}>
             <div className="container">
                 <div className="flex flex-col justify-center items-center">
                     <div className="d-flex flex-column">

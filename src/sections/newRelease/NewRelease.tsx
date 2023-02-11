@@ -38,7 +38,7 @@ export const NewRelease = () => {
                         pariatur laboriosam perspiciatis autem asperiores.{" "}
                         <a
                             href="#"
-                            className="font-bold text-rose-600 hover:pl-5 duration-300 whitespace-nowrap "
+                            className="font-bold text-rose-500 hover:pl-5 duration-300 whitespace-nowrap "
                         >
                             LISTEN NOW
                         </a>

@@ -29,6 +29,11 @@ module.exports = {
             fontSize: {
                 "9xl": "12rem",
             },
+            extend: {
+                boxShadow: {
+                    xl: "0 0 4px rgba(0, 0, 0, 0.2)",
+                },
+            },
         },
     },
     plugins: [],

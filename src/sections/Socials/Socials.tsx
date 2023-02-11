@@ -1,50 +1,64 @@
+import Background from "../../assets/images/section-socials.jpg";
+import { Link } from "../../components/Link/Link";
+import styles from "./Socials.module.scss";
+
 export const Socials = () => {
     return (
-        <section className="section py-section-2 pb-0 text-break">
+        <section className="py-20 pb-0 text-break">
             <div className="container">
-                <div className="section-heading-1 section-heading-special-1 text-center">
-                    <span className="d-block">Get Connected</span>
-                    <h2 className="h2">SOCIALS</h2>
+                <div className="line-y-dark text-center">
+                    <span className="block mb-2">Get Connected</span>
+                    <h2 className="font-bold lg:text-7xl">SOCIALS</h2>
                 </div>
             </div>
             <div
-                className="text-light bg-dark-overlay bg-fixed"
-                style={{ backgroundImage: `url(${"lol"})` }}
+                className="text-white overlay-dark bg-fixed"
+                style={{ backgroundImage: `url(${Background})` }}
             >
                 <div className="container">
-                    <div className="row">
-                        <div className="col-12 col-sm-6 col-md-4 px-4 px-md-5 pb-md-5 pt-custom-1 border-left-gray sm-hover">
-                            <div className="sm-wrapper">
-                                <h3 className="h4 sm-name">YouTube</h3>
-                                <div className="sm-opacity">
-                                    <p className="sm-description">
-                                        Subscribe to my YouTube channel.
-                                    </p>
-                                    <a className="btn btn-outline-primary sm-button" href="#">
+                    <div className="grid lg:grid-cols-3">
+                        <div className={`${styles["social"]} px-7 pb-7 md:px-10 md:pb-10 lg:pt-96`}>
+                            <div className="relative">
+                                <h3
+                                    className={`${styles["medium-name"]} font-bold lg:text-3xl mb-3"`}
+                                >
+                                    YouTube
+                                </h3>
+                                <div className={styles["hidden-items"]}>
+                                    <p className="mb-3">Subscribe to my YouTube channel.</p>
+                                    <Link href="#" asButton>
                                         Subscribe
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-12 col-sm-6 col-md-4 px-4 px-md-5 pb-md-5 pt-custom-1 border-left-gray sm-hover">
-                            <div className="sm-wrapper">
-                                <h3 className="h4 sm-name">Soundcloud</h3>
-                                <div className="sm-opacity">
-                                    <p className="sm-description">Follow me on Soundcloud.</p>
-                                    <a className="btn btn-outline-primary sm-button" href="#">
+                        <div className={`${styles["social"]} px-7 pb-7 md:px-10 md:pb-10 lg:pt-96`}>
+                            <div className="relative">
+                                <h3
+                                    className={`${styles["medium-name"]} font-bold lg:text-3xl mb-3"`}
+                                >
+                                    Soundcloud
+                                </h3>
+                                <div className={styles["hidden-items"]}>
+                                    <p className="mb-3">Follow me on Soundcloud.</p>
+                                    <Link href="#" asButton>
                                         Follow
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-12 col-sm-6 col-md-4 px-4 px-md-5 pb-5 pt-custom-1 border-left-gray sm-hover">
-                            <div className="sm-wrapper">
-                                <h3 className="h4 sm-name">Instagram</h3>
-                                <div className="sm-opacity">
-                                    <p className="sm-description">Follow me on instagram.</p>
-                                    <a className="btn btn-outline-primary sm-button" href="#">
+                        <div className={`${styles["social"]} px-7 pb-7 md:px-10 md:pb-10 lg:pt-96`}>
+                            <div className="relative">
+                                <h3
+                                    className={`${styles["medium-name"]} font-bold lg:text-3xl mb-3"`}
+                                >
+                                    Instagram
+                                </h3>
+                                <div className={styles["hidden-items"]}>
+                                    <p className="mb-3">Follow me on instagram.</p>
+                                    <Link href="#" asButton>
                                         Follow
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
