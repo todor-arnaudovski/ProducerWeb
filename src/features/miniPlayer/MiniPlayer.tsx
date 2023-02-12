@@ -19,8 +19,8 @@ export const MiniPlayer = () => {
         >
             <div className={`${styles["thumb"]} relative`}>
                 <img
-                    src={audioContext.metadata.artworkUrl ?? ""}
-                    alt={audioContext.metadata.title ?? "Artwork"}
+                    src={audioContext.currentAudio.metadata.artworkUrl ?? ""}
+                    alt={audioContext.currentAudio.metadata.title ?? "Artwork"}
                     className="w-full h-auto"
                 />
                 <button
@@ -33,7 +33,7 @@ export const MiniPlayer = () => {
             <div className="flex flex-col justify-center text-center px-5">
                 <span className="text-sm block mb-2">Now playing</span>
                 <h5 className="text-xl font-bold">
-                    {truncate(audioContext.metadata.title, 15, "...")}
+                    {truncate(audioContext.currentAudio.metadata.title, 15, "...")}
                 </h5>
             </div>
         </div>

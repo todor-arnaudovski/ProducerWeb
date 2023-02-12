@@ -1,14 +1,10 @@
 import { createContext, useEffect, useRef, useState } from "react";
-import { availableAudio } from "../assets/music/audio";
+import { AudioItem, getAudio } from "../services/audioService";
 
 interface AudioContextTypes {
-    id: string | null;
-    audio: HTMLAudioElement | null;
-    metadata: {
-        title: string | null;
-        artworkUrl: string | null;
-        released: Date;
-    };
+    audioList: AudioItem[];
+    currentAudio: AudioItem;
+    audioElement: HTMLAudioElement | null;
     isPlaying: boolean;
     play: () => void;
     pause: () => void;
@@ -16,17 +12,21 @@ interface AudioContextTypes {
     previous: () => void;
     next: () => void;
     setCurrentTime: (time: number) => void;
-    setCurrentAudioHandler: (id: string) => void;
+    setCurrentAudioHandler: (uuid: string) => void;
 }
 
 const initialAudioContext: AudioContextTypes = {
-    id: null,
-    audio: null,
-    metadata: {
-        title: null,
-        artworkUrl: null,
-        released: new Date(),
+    audioList: [],
+    currentAudio: {
+        uuid: null,
+        url: null,
+        metadata: {
+            title: null,
+            artworkUrl: null,
+            released: null,
+        },
     },
+    audioElement: null,
     isPlaying: false,
     play: () => {},
     pause: () => {},
@@ -45,14 +45,27 @@ export const AudioContext = createContext(initialAudioContext);
 
 export const AudioProvider = ({ children }: AudioContextProps) => {
     const [index, setIndex] = useState(0);
-    const [currentAudio, setCurrentAudio] = useState(availableAudio[index]);
+    const [audioList, setAudioList] = useState<AudioItem[]>([]);
+    const [currentAudio, setCurrentAudio] = useState<AudioItem | null>(null);
     const [isPlaying, setIsPlaying] = useState(false);
-    const audioRef = useRef(new Audio(availableAudio[index].url));
+    const audioRef = useRef(new Audio(audioList[index]?.url ?? ""));
 
     useEffect(() => {
-        audioRef.current.src = currentAudio.url;
+        getAudio()
+            .then((data) => {
+                if (!data || data.length <= 0) return;
+                setAudioList(data);
+                setCurrentAudio(data[index]);
+            })
+            .catch((e) => {
+                console.error("Fetch audio error!", e);
+            });
+    }, []);
+
+    useEffect(() => {
+        audioRef.current.src = currentAudio?.url ?? "";
         if (audioRef.current && isPlaying) play();
-    }, [currentAudio.url]);
+    }, [currentAudio, currentAudio?.url]);
 
     const play = () => {
         audioRef.current.play();
@@ -72,26 +85,26 @@ export const AudioProvider = ({ children }: AudioContextProps) => {
 
     const previous = () => {
         stop();
-        const prevIndex = index <= 0 ? availableAudio.length - 1 : index - 1;
+        const prevIndex = index <= 0 ? audioList.length - 1 : index - 1;
         setIndex(prevIndex);
-        setCurrentAudio(availableAudio[prevIndex]);
+        setCurrentAudio(audioList[prevIndex]);
     };
 
     const next = () => {
         stop();
-        const nextIndex = index >= availableAudio.length - 1 ? 0 : index + 1;
+        const nextIndex = index >= audioList.length - 1 ? 0 : index + 1;
         setIndex(nextIndex);
-        setCurrentAudio(availableAudio[nextIndex]);
+        setCurrentAudio(audioList[nextIndex]);
     };
 
     const setCurrentTime = (time: number) => {
         audioRef.current.currentTime = time;
     };
 
-    const setCurrentAudioHandler = (id: string) => {
-        const audio = availableAudio.find((a) => a.id === id);
+    const setCurrentAudioHandler = (uuid: string) => {
+        const audio = audioList.find((a) => a.uuid === uuid);
         if (audio) {
-            const foundIndex = availableAudio.findIndex((a) => a === audio);
+            const foundIndex = audioList.findIndex((a) => a === audio);
             setIndex(foundIndex);
             setCurrentAudio(audio);
             return;
@@ -100,13 +113,17 @@ export const AudioProvider = ({ children }: AudioContextProps) => {
     };
 
     const audioContext: AudioContextTypes = {
-        id: currentAudio.id,
-        audio: audioRef.current,
-        metadata: {
-            title: currentAudio.metadata.title,
-            artworkUrl: currentAudio.metadata.artworkUrl,
-            released: currentAudio.metadata.released,
+        audioList,
+        currentAudio: {
+            uuid: currentAudio?.uuid ?? "",
+            url: currentAudio?.url ?? "",
+            metadata: {
+                title: currentAudio?.metadata.title ?? "",
+                artworkUrl: currentAudio?.metadata.artworkUrl ?? "",
+                released: currentAudio?.metadata.released ?? new Date(),
+            },
         },
+        audioElement: audioRef.current,
         isPlaying,
         play,
         pause,

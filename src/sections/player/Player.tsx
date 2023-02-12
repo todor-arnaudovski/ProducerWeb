@@ -16,64 +16,69 @@ export const Player = () => {
     // update player on interval
     useEffect(() => {
         const progressInterval = () => {
-            if (!audioContext.audio) return;
+            if (!audioContext.audioElement) return;
             updateTimeText();
-            if (audioContext.audio?.currentTime >= audioContext.audio?.duration) {
+            if (audioContext.audioElement?.currentTime >= audioContext.audioElement?.duration) {
                 audioContext.next();
                 setProgress(0);
             } else {
                 const currentProgress =
-                    (audioContext.audio.currentTime / audioContext.audio.duration) * 100;
+                    (audioContext.audioElement.currentTime / audioContext.audioElement.duration) *
+                    100;
                 setProgress(currentProgress);
             }
         };
-        let intervalId: number;
+        let intervalId: NodeJS.Timer;
         if (audioContext.isPlaying) {
             intervalId = setInterval(progressInterval, 1000);
         }
         return () => {
             clearInterval(intervalId);
         };
-    }, [audioContext.audio?.src, audioContext.isPlaying]);
+    }, [audioContext.audioElement?.src, audioContext.isPlaying]);
 
     // set initial audioTimeText
     useEffect(() => {
-        if (!audioContext.audio) return;
-        audioContext.audio.addEventListener("loadedmetadata", updateTimeText);
+        if (!audioContext.audioElement) return;
+        audioContext.audioElement.addEventListener("loadedmetadata", updateTimeText);
         return () => {
-            audioContext.audio?.removeEventListener("loadedmetadata", updateTimeText);
+            audioContext.audioElement?.removeEventListener("loadedmetadata", updateTimeText);
         };
-    }, [audioContext.audio?.src]);
+    }, [audioContext.audioElement?.src]);
 
     const updateTimeText = useCallback(() => {
-        if (!audioContext.audio) return;
-        const { duration, currentTime } = audioContext.audio;
+        if (!audioContext.audioElement) return;
+        const { duration, currentTime } = audioContext.audioElement;
+
+        if (Number.isNaN(duration) || Number.isNaN(currentTime)) return;
+
         let currentTimeSeconds =
-            Math.floor(currentTime % 60) < 10
+            Math.ceil(currentTime % 60) < 9
                 ? `0${Math.ceil(currentTime % 60)}`
                 : `${Math.ceil(currentTime % 60)}`;
         let durationSeconds =
-            Math.ceil(duration % 60) < 10
+            Math.ceil(duration % 60) < 9
                 ? `0${Math.ceil(duration % 60)}`
                 : `${Math.ceil(duration % 60)}`;
         const currentTimeCalc = `${Math.floor(currentTime / 60)}:${currentTimeSeconds}`;
         const durationCalc = `${Math.floor(duration / 60)}:${durationSeconds}`;
+
         setAudioTimeText({
             current: currentTimeCalc,
             total: durationCalc,
         });
-    }, []);
+    }, [audioContext.audioElement]);
 
     const setProgressHandler = useCallback(
         (e: React.MouseEvent<HTMLElement>) => {
-            if (!scrubberRef.current || !audioContext.audio) return;
+            if (!scrubberRef.current || !audioContext.audioElement) return;
             const width = scrubberRef.current.offsetWidth;
             const clickX = e.nativeEvent.offsetX;
-            const duration = audioContext.audio?.duration;
+            const duration = audioContext.audioElement?.duration;
             const currentTime = (clickX / width) * duration;
             audioContext.setCurrentTime(currentTime);
             const currentProgress =
-                (audioContext.audio.currentTime / audioContext.audio.duration) * 100;
+                (audioContext.audioElement.currentTime / audioContext.audioElement.duration) * 100;
             setProgress(currentProgress);
             updateTimeText();
         },
@@ -104,21 +109,25 @@ export const Player = () => {
                     <div
                         className={`${styles["player-bg"]} bg-cover	bg-no-repeat bg-center blur`}
                         style={{
-                            backgroundImage: `url(${audioContext.metadata.artworkUrl ?? ""})`,
+                            backgroundImage: `url(${
+                                audioContext.currentAudio.metadata.artworkUrl ?? ""
+                            })`,
                         }}
                     ></div>
                     <div className="relative z-10">
                         <div className={`${styles["player-thumb"]} mb-5`}>
                             <img
-                                src={audioContext.metadata.artworkUrl ?? ""}
-                                alt={audioContext.metadata.title ?? ""}
+                                src={audioContext.currentAudio.metadata.artworkUrl ?? ""}
+                                alt={audioContext.currentAudio.metadata.title ?? ""}
                                 className="mx-auto"
                             />
                         </div>
                         <div className="text-white text-light">
-                            <h3 className="font-bold lg:text-xl">{audioContext.metadata.title}</h3>
+                            <h3 className="font-bold lg:text-xl">
+                                {audioContext.currentAudio.metadata.title}
+                            </h3>
                             <span className="block tracking-widest">
-                                {audioContext.metadata.released.getFullYear()}
+                                {audioContext.currentAudio.metadata.released?.getFullYear()}
                             </span>
                         </div>
                         <div className="py-10 lg:py-12 mx-12 text-white">
@@ -148,10 +157,10 @@ export const Player = () => {
                                     className={`${styles["audio-scrubber-fill"]}`}
                                     style={{ width: `${progress}%` }}
                                 ></div>
-                                <div
+                                {/* <div
                                     className={`${styles["audio-scrubber-handle"]}`}
                                     style={{ left: `${progress}%` }}
-                                ></div>
+                                ></div> */}
                             </div>
                             <div className="flex justify-between">
                                 <span>{audioTimeText.current}</span>

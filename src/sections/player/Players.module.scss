@@ -84,18 +84,18 @@
     width: 0;
     background: #ff2d55;
 }
-.audio-scrubber-handle {
-    position: absolute;
-    top: -3px;
-    left: 0;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #fff;
-    margin-left: -8px;
-    -webkit-transition: -webkit-transform 0.3s;
-    transition: -webkit-transform 0.3s;
-    transition: transform 0.3s;
-    transition: transform 0.3s, -webkit-transform 0.3s;
-    cursor: pointer;
-}
+// .audio-scrubber-handle {
+//     position: absolute;
+//     top: -3px;
+//     left: 0;
+//     width: 16px;
+//     height: 16px;
+//     border-radius: 50%;
+//     background: #fff;
+//     margin-left: -8px;
+//     -webkit-transition: -webkit-transform 0.3s;
+//     transition: -webkit-transform 0.3s;
+//     transition: transform 0.3s;
+//     transition: transform 0.3s, -webkit-transform 0.3s;
+//     cursor: pointer;
+// }
