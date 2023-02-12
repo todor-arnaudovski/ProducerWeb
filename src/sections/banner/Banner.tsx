@@ -12,7 +12,7 @@ export const Banner = (props: { spacingTop: number }) => {
                             className="font-bold lg:text-9xl animated-background"
                             style={{ backgroundImage: `url(${Background})` }}
                         >
-                            K|M|N|E
+                            K+M+N+E
                         </h1>
                         <span>music by</span>{" "}
                         <h2 className="font-bold lg:text-2xl dash-left">Koldmane</h2>

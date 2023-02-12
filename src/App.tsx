@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { ScrollToTop } from "./components/scrollToTop/ScrollToTop";
+import ScrollToTopOnReload from "./components/scrollToTopOnReload/ScrollToTopOnReload";
 import { AudioProvider } from "./contexts/audioContext";
 import { MiniPlayer } from "./features/miniPlayer/MiniPlayer";
+import { Preloader } from "./features/preloader/Preloader";
 import { Footer } from "./layout/footer";
 import { Header } from "./layout/header";
 import { About } from "./sections/about/About";
@@ -25,6 +27,8 @@ function App() {
 
     return (
         <div className="App">
+            <ScrollToTopOnReload />
+            <Preloader />
             <AudioProvider>
                 <Header ref={headerRef} setIsLoadedHandler={setIsHeaderLoaded} />
                 <Banner spacingTop={headerHeight} />

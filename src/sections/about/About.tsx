@@ -1,4 +1,4 @@
-import Logo from "../../assets/logos/trillo-logo-1.png";
+import Logo from "../../assets/logos/logo.png";
 import Background from "../../assets/images/section-2.jpg";
 
 export const About = () => {
@@ -14,13 +14,12 @@ export const About = () => {
                         He heard something that he knew to be music
                     </h3>
                     <p className="mb-10">
-                        See-through delicate embroidered organza blue lining luxury acetate-mix
-                        stretch pleat detailing. Leather detail shoulder contraFstic colour contour
-                        stunning silhouette working peplum. Statement buttons cover-up tweaks patch
-                        pockets perennial.
+                        Discover the magic behind the music. With a unique sound and innovative
+                        production style, he brings a fresh and exciting energy to every track.
+                        Experience the magic for yourself.
                     </p>
                     <img
-                        className="self-center invert"
+                        className="self-center"
                         style={{ maxWidth: "100px" }}
                         src={Logo}
                         alt="Trillo Logo"

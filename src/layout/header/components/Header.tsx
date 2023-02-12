@@ -1,10 +1,9 @@
 import { forwardRef, RefObject, useEffect, useRef, useState } from "react";
-import Logo from "../../../assets/logos/trillo-logo-1.png";
+import Logo from "../../../assets/logos/logo.png";
 
 import styles from "../assets/Header.module.scss";
 import { HamburgerIcon } from "./HamburgerIcon";
-
-const navLinks = ["Player", "New Release", "My Music", "About Me", "Socials"];
+import { navLinks, email } from "../../../data/siteData";
 
 interface HeaderProps {
     setIsLoadedHandler: (state: boolean) => void;
@@ -40,7 +39,7 @@ export const Header = forwardRef(
                             <img
                                 ref={logoRef}
                                 src={Logo}
-                                className={`${styles["logo"]}`}
+                                className={`${styles["logo"]} invert`}
                                 alt="Koldmane Logo"
                             />
                         </a>
@@ -73,11 +72,8 @@ export const Header = forwardRef(
                             </ul>
                             <div>
                                 Contact me:{" "}
-                                <a
-                                    href="mailto:contact@koldmane.com"
-                                    className="font-bold text-rose-500"
-                                >
-                                    contact@koldmane.com
+                                <a href={`mailto:${email}`} className="font-bold text-rose-500">
+                                    {email}
                                 </a>
                             </div>
                         </div>

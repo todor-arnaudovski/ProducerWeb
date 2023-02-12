@@ -1,25 +1,25 @@
-import Logo from "../../../assets/logos/trillo-logo-1.png";
-import { AiFillYoutube, AiFillInstagram } from "react-icons/ai";
-import { FaSoundcloud } from "react-icons/fa";
+import Logo from "../../../assets/logos/logo.png";
 import styles from "../assets/Footer.module.scss";
-
-const navLinks = ["Player", "New Release", "My Music", "About Me", "Socials"];
-const socialIcons = [AiFillYoutube, AiFillInstagram, FaSoundcloud];
+import { socials, navLinks, email } from "../../../data/siteData";
 
 export const Footer = () => {
     return (
         <footer className={`${styles["footer"]} bg-black text-white py-28`}>
             <div className="container text-center">
                 <a href="#" className="inline-block mb-5">
-                    <img className={`${styles["logo"]} invert`} src={Logo} alt="Koldmane Logo" />
+                    <img className={styles["logo"]} src={Logo} alt="Koldmane Logo" />
                 </a>
                 <div className={`${styles["icons-wrapper"]} mb-5`}>
                     <ul className="flex justify-center">
-                        {socialIcons.map((Icon, i) => {
+                        {socials.map((platform, i) => {
                             return (
                                 <li key={i} className="text-3xl mx-2">
-                                    <a href="#" className="hover:text-rose-500 duration-300">
-                                        <Icon />
+                                    <a
+                                        href={platform.url}
+                                        className="hover:text-rose-500 duration-300"
+                                        target={platform.url !== "#" ? "_blank" : "_top"}
+                                    >
+                                        {<platform.Icon />}
                                     </a>
                                 </li>
                             );
@@ -30,9 +30,9 @@ export const Footer = () => {
                     Contact me:{" "}
                     <a
                         className="hover:text-rose-500 duration-300 font-bold"
-                        href="mailto:trillobeats@gmail.com"
+                        href={`mailto:${email}`}
                     >
-                        contact@koldmane.com
+                        {email}
                     </a>
                 </div>
                 <div className="mb-5">
@@ -48,7 +48,7 @@ export const Footer = () => {
                         })}
                     </ul>
                 </div>
-                <p className="mb-0">© {new Date().getFullYear()} Trillo Music.</p>
+                <p className="mb-0">© {new Date().getFullYear()} Koldmane Music.</p>
             </div>
         </footer>
     );

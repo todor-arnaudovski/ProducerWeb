@@ -154,8 +154,8 @@ export const Player = () => {
                                 ></div>
                             </div>
                             <div className="flex justify-between">
-                                <span id="timeCurrent">{audioTimeText.current}</span>
-                                <span id="timeDuration">{audioTimeText.total}</span>
+                                <span>{audioTimeText.current}</span>
+                                <span>{audioTimeText.total}</span>
                             </div>
                         </div>
                     </div>

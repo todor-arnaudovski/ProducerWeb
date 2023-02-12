@@ -34,8 +34,8 @@ export const NewRelease = () => {
                         RELEASE
                     </h2>
                     <p className="md:mb-5 text-white">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi temporibus
-                        pariatur laboriosam perspiciatis autem asperiores.{" "}
+                        Experience an epic soundscape like no other. So, turn up the volume and get
+                        ready for a musical experience that will leave a lasting impression.{" "}
                         <a
                             href="#"
                             className="font-bold text-rose-500 hover:pl-5 duration-300 whitespace-nowrap "
