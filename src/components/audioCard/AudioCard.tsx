@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AiFillCaretRight, AiOutlinePause } from "react-icons/ai";
 import { AudioContext } from "../../contexts/audioContext";
 import { AudioItem } from "../../services/audioService";
-import styles from "./MyMusic.module.scss";
+import styles from "./AudioCard.module.scss";
 
 export const AudioCard = (props: { data: AudioItem }) => {
     const { data: audio } = props;
@@ -10,6 +10,7 @@ export const AudioCard = (props: { data: AudioItem }) => {
 
     const playAudioHandler = () => {
         audioContext.setCurrentAudioHandler(audio?.uuid ?? "");
+        audioContext.setProgressHandler(0);
         !audioContext.isPlaying && audioContext.play();
     };
 
@@ -31,7 +32,7 @@ export const AudioCard = (props: { data: AudioItem }) => {
 
     return (
         <div className="mb-5">
-            <div className={`${styles["song-card"]} mb-4`}>
+            <div className={`${styles["audio-card"]} mb-4`}>
                 <div className={`${styles["controls"]}`}>
                     <AiFillCaretRight onClick={playAudioHandler} className={getPlayState()} />
                     <AiOutlinePause onClick={pauseAudioHandler} className={getPauseState()} />

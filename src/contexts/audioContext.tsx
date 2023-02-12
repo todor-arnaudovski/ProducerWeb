@@ -6,6 +6,7 @@ interface AudioContextTypes {
     currentAudio: AudioItem;
     audioElement: HTMLAudioElement | null;
     isPlaying: boolean;
+    progress: number;
     play: () => void;
     pause: () => void;
     stop: () => void;
@@ -13,6 +14,7 @@ interface AudioContextTypes {
     next: () => void;
     setCurrentTime: (time: number) => void;
     setCurrentAudioHandler: (uuid: string) => void;
+    setProgressHandler: (value: number) => void;
 }
 
 const initialAudioContext: AudioContextTypes = {
@@ -28,6 +30,7 @@ const initialAudioContext: AudioContextTypes = {
     },
     audioElement: null,
     isPlaying: false,
+    progress: 0,
     play: () => {},
     pause: () => {},
     stop: () => {},
@@ -35,6 +38,7 @@ const initialAudioContext: AudioContextTypes = {
     next: () => {},
     setCurrentTime: () => {},
     setCurrentAudioHandler: () => {},
+    setProgressHandler: () => {},
 };
 
 interface AudioContextProps {
@@ -48,12 +52,14 @@ export const AudioProvider = ({ children }: AudioContextProps) => {
     const [audioList, setAudioList] = useState<AudioItem[]>([]);
     const [currentAudio, setCurrentAudio] = useState<AudioItem | null>(null);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [progress, setProgress] = useState(0);
     const audioRef = useRef(new Audio(audioList[index]?.url ?? ""));
 
     useEffect(() => {
         getAudio()
             .then((data) => {
                 if (!data || data.length <= 0) return;
+                console.log("FETCHED");
                 setAudioList(data);
                 setCurrentAudio(data[index]);
             })
@@ -112,6 +118,10 @@ export const AudioProvider = ({ children }: AudioContextProps) => {
         console.error("Audio not found");
     };
 
+    const setProgressHandler = (value: number) => {
+        setProgress(value);
+    };
+
     const audioContext: AudioContextTypes = {
         audioList,
         currentAudio: {
@@ -125,6 +135,7 @@ export const AudioProvider = ({ children }: AudioContextProps) => {
         },
         audioElement: audioRef.current,
         isPlaying,
+        progress,
         play,
         pause,
         stop,
@@ -132,6 +143,7 @@ export const AudioProvider = ({ children }: AudioContextProps) => {
         next,
         setCurrentTime,
         setCurrentAudioHandler,
+        setProgressHandler,
     };
 
     return <AudioContext.Provider value={audioContext}>{children}</AudioContext.Provider>;

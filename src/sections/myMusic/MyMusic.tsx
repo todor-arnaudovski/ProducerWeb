@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AudioContext } from "../../contexts/audioContext";
-import { AudioCard } from "./AudioCard";
+import { AudioCard } from "../../components/audioCard/AudioCard";
 
 export const MyMusic = () => {
     const audioContext = useContext(AudioContext);
