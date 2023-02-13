@@ -19,7 +19,7 @@ export const About = () => {
                         Experience the magic for yourself.
                     </p>
                     <img
-                        className="self-center"
+                        className="self-center bounce"
                         style={{ maxWidth: "100px" }}
                         src={Logo}
                         alt="Trillo Logo"

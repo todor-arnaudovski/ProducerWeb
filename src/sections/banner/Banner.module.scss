@@ -1,0 +1,27 @@
+.overlay {
+    position: absolute;
+    inset: 0;
+    width: 100vw;
+    max-width: 100%;
+    min-height: 100%;
+    background: rgb(0, 0, 0);
+    background: -moz-linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(136, 136, 136, 0.5) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    background: -webkit-linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(136, 136, 136, 0.5) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(136, 136, 136, 0.5) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#ffffff",GradientType=1);
+}

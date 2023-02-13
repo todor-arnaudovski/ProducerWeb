@@ -101,6 +101,30 @@
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
         border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+.hover-underline {
+    position: relative;
+    z-index: 2;
+    &:before {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: -10px;
+        width: 0;
+        height: 10px;
+        background-color: #ff2d55;
+        opacity: 0.3;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+        z-index: -3;
+        -webkit-transition: 0.3s;
+        transition: 0.3s;
+        transform: skewX(-12deg);
+    }
+    &:hover {
+        &:before {
+            width: calc(100% + 20px);
+        }
+    }
+}
 @-webkit-keyframes shine {
     from {
         background-position: center 0;
@@ -116,6 +140,23 @@
     to {
         background-position: center 200%;
     }
+}
+@keyframes bounce {
+    0% {
+        transform: translatey(0px);
+    }
+    25% {
+        transform: translatey(-5px);
+    }
+    75% {
+        transform: translatey(5px);
+    }
+    100% {
+        transform: translatey(0px);
+    }
+}
+.bounce {
+    animation: bounce 3s linear infinite;
 }
 @media (min-width: 992px) {
     .line-y-dark,

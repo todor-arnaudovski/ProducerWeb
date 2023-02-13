@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { ParallaxProvider } from "react-scroll-parallax";
+import { ScrollToSection } from "./components/scrollToSection/ScrollToSection";
 import { ScrollToTop } from "./components/scrollToTop/ScrollToTop";
 import { AudioProvider } from "./contexts/audioContext";
 import { MiniPlayer } from "./features/miniPlayer/MiniPlayer";
@@ -17,6 +19,7 @@ function App() {
     const [headerHeight, setHeaderHeight] = useState(0);
     const [isHeaderLoaded, setIsHeaderLoaded] = useState(false);
     const headerRef = useRef<HTMLDivElement>(null);
+    const scrollToSectionRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (isHeaderLoaded && headerRef?.current) {
@@ -25,22 +28,25 @@ function App() {
     }, [isHeaderLoaded]);
 
     return (
-        <div className="App">
-            <Preloader />
-            <AudioProvider>
-                <Header ref={headerRef} setIsLoadedHandler={setIsHeaderLoaded} />
-                <Banner spacingTop={headerHeight} />
-                <Player />
-                <NewRelease />
-                <MyMusic />
-                <About />
-                <Video />
-                <Socials />
-                <Footer />
+        <ParallaxProvider>
+            <div className="App">
+                <Preloader />
+                <ScrollToSection sectionRef={scrollToSectionRef} />
                 <ScrollToTop />
-                <MiniPlayer />
-            </AudioProvider>
-        </div>
+                <AudioProvider>
+                    <Header ref={headerRef} setIsLoadedHandler={setIsHeaderLoaded} />
+                    <Banner spacingTop={headerHeight} ref={scrollToSectionRef} />
+                    <Player />
+                    <NewRelease />
+                    <MyMusic />
+                    <About />
+                    <Video />
+                    <Socials />
+                    <Footer />
+                    <MiniPlayer />
+                </AudioProvider>
+            </div>
+        </ParallaxProvider>
     );
 }
 

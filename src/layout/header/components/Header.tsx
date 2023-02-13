@@ -1,9 +1,10 @@
-import { forwardRef, RefObject, useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import Logo from "../../../assets/logos/logo.png";
 
 import styles from "../assets/Header.module.scss";
 import { HamburgerIcon } from "./HamburgerIcon";
 import { navLinks, email } from "../../../data/siteData";
+import { usePageIsScrolled } from "../../../hooks/useIsPageScrolled";
 
 interface HeaderProps {
     setIsLoadedHandler: (state: boolean) => void;
@@ -14,6 +15,7 @@ export const Header = forwardRef(
         const { setIsLoadedHandler } = props;
         const [isNavbarOpen, setIsNavbarOpen] = useState(false);
         const logoRef = useRef<HTMLImageElement>(null);
+        const isScrolled = usePageIsScrolled();
 
         useEffect(() => {
             const onLoad = () => {
@@ -32,8 +34,13 @@ export const Header = forwardRef(
         const closedClass = [!isNavbarOpen && styles["closed"]].filter(Boolean).join(" ");
 
         return (
-            <header ref={ref} className="fixed top-0 left-0 w-full z-50">
-                <nav className={`${styles["navbar"]} shadow`}>
+            <header
+                ref={ref}
+                className={`fixed top-0 left-0 w-full z-50 bg-white duration-500 ${
+                    isScrolled ? "shadow-md py-3" : "shadow py-7"
+                }`}
+            >
+                <nav className={`${styles["navbar"]}`}>
                     <div className="container flex flex-wrap items-center justify-between">
                         <a href="#" className="z-20">
                             <img
@@ -59,10 +66,10 @@ export const Header = forwardRef(
                             <ul className="lg:flex lg:mx-auto">
                                 {navLinks.map((link, i) => {
                                     return (
-                                        <li key={`${link}-${i}`}>
+                                        <li key={`${link}-${i}`} className="lg:px-5 py-3">
                                             <a
                                                 href={`#${link}`}
-                                                className={`${styles["nav-link"]} lg:px-5 py-3 font-bold`}
+                                                className={`${styles["nav-link"]} font-bold block hover-underline`}
                                             >
                                                 {link}
                                             </a>
@@ -71,8 +78,18 @@ export const Header = forwardRef(
                                 })}
                             </ul>
                             <div>
-                                Contact me:{" "}
-                                <a href={`mailto:${email}`} className="font-bold text-rose-500">
+                                <span
+                                    className={`text-sm duration-300 ${
+                                        isScrolled && "text-slate-400"
+                                    }`}
+                                >
+                                    Contact me:
+                                </span>
+                                <br />{" "}
+                                <a
+                                    href={`mailto:${email}`}
+                                    className="font-bold hover:text-rose-500 duration-300"
+                                >
                                     {email}
                                 </a>
                             </div>
