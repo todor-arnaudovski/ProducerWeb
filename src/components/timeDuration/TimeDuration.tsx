@@ -13,10 +13,11 @@ export const TimeDuration = () => {
         return () => {
             audioContext.audioElement?.removeEventListener("loadedmetadata", updateTimeText);
         };
-    }, [audioContext.audioElement, audioContext.audioElement?.src]);
+    }, [audioContext.audioElement]);
 
     // update time text
     useEffect(() => {
+        if (!audioContext.audioElement) return;
         updateTimeText();
     }, [audioContext.audioElement?.duration]);
 
@@ -33,7 +34,7 @@ export const TimeDuration = () => {
         const durationCalc = `${Math.floor(duration / 60)}:${durationSeconds}`;
 
         setTimeText(durationCalc);
-    }, [audioContext.audioElement, audioContext.audioElement?.duration]);
+    }, [audioContext.audioElement]);
 
     return <span>{timeText}</span>;
 };

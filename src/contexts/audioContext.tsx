@@ -1,4 +1,5 @@
 import { createContext, useEffect, useRef, useState } from "react";
+import { useFirestoreWithRateLimiting } from "../hooks/useFirestoreWithRateLimiting";
 import { AudioItem, getAudio } from "../services/audioService";
 
 interface AudioContextTypes {
@@ -54,18 +55,23 @@ export const AudioProvider = ({ children }: AudioContextProps) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
     const audioRef = useRef(new Audio(audioList[index]?.url ?? ""));
+    const { makeRequest } = useFirestoreWithRateLimiting();
 
     useEffect(() => {
-        getAudio()
-            .then((data) => {
-                if (!data || data.length <= 0) return;
-                console.log("FETCHED");
-                setAudioList(data);
-                setCurrentAudio(data[index]);
-            })
-            .catch((e) => {
-                console.error("Fetch audio error!", e);
+        const fetchAudio = async () => {
+            await makeRequest(async () => {
+                await getAudio()
+                    .then((data) => {
+                        if (!data || data.length <= 0) return;
+                        setAudioList(data);
+                        setCurrentAudio(data[index]);
+                    })
+                    .catch((e) => {
+                        console.error("Fetch audio error!", e);
+                    });
             });
+        };
+        fetchAudio();
     }, []);
 
     useEffect(() => {

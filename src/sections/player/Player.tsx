@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useContext } from "react";
 import Background from "../../assets/images/section-1.jpg";
 import styles from "./Players.module.scss";
 import { AiFillBackward, AiFillForward, AiFillCaretRight, AiOutlinePause } from "react-icons/ai";
@@ -6,6 +6,7 @@ import { AudioContext } from "../../contexts/audioContext";
 import { Scrubber } from "../../components/scrubber/Scrubber";
 import { TimeCurrent } from "../../components/timeCurrent/TimeCurrent";
 import { TimeDuration } from "../../components/timeDuration/TimeDuration";
+import { Thumbnail } from "../../components/thumbnail/Thumbnail";
 
 export const Player = () => {
     const audioContext = useContext(AudioContext);
@@ -41,11 +42,7 @@ export const Player = () => {
                     ></div>
                     <div className="relative z-10">
                         <div className={`${styles["player-thumb"]} mb-5`}>
-                            <img
-                                src={audioContext.currentAudio.metadata.artworkUrl ?? ""}
-                                alt={audioContext.currentAudio.metadata.title ?? ""}
-                                className="mx-auto"
-                            />
+                            <Thumbnail />
                         </div>
                         <div className="text-white text-light">
                             <h3 className="font-bold lg:text-xl">

@@ -1,16 +1,41 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AudioContext } from "../../contexts/audioContext";
 import styles from "./Preloader.module.scss";
 
 export const Preloader = () => {
     const [isLoaded, setIsLoaded] = useState(false);
+    const audioContext = useContext(AudioContext);
 
     useEffect(() => {
-        const loadedContent = () => {
-            setIsLoaded(true);
-        };
-        if (document.readyState !== "loading") {
-            return loadedContent();
+        let resourcePromises = [];
+
+        // Add a promise for each resource that needs to be loaded
+        if (audioContext.currentAudio.metadata.artworkUrl) {
+            resourcePromises.push(
+                new Promise((resolve) => {
+                    const image = new Image();
+                    if (audioContext.currentAudio.metadata.artworkUrl) {
+                        image.src = audioContext.currentAudio.metadata.artworkUrl;
+                        image.onload = resolve;
+                    }
+                })
+            );
         }
+        if (audioContext.currentAudio.metadata.artworkUrl) {
+            resourcePromises.push(
+                new Promise((resolve) => {
+                    const audio = new Audio();
+                    if (audioContext.currentAudio.url) {
+                        audio.src = audioContext.currentAudio.url;
+                        audio.oncanplaythrough = resolve;
+                    }
+                })
+            );
+        }
+
+        Promise.all(resourcePromises).then(() => {
+            setIsLoaded(true);
+        });
     }, []);
 
     return (

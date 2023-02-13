@@ -4,7 +4,7 @@ import { socials, navLinks, email } from "../../../data/siteData";
 
 export const Footer = () => {
     return (
-        <footer className={`${styles["footer"]} bg-black text-white py-28`}>
+        <footer className={`${styles["footer"]} bg-black text-white pt-28 pb-32`}>
             <div className="container text-center">
                 <a href="#" className="inline-block mb-5">
                     <img className={styles["logo"]} src={Logo} alt="Koldmane Logo" />

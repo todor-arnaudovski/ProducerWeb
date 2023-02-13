@@ -15,7 +15,7 @@ export const getAudio = async () => {
     const audioList: AudioItem[] = [];
     const querySnapshot = await getDocs(collection(db, "Audio"));
 
-    querySnapshot.forEach((audio) => {
+    querySnapshot.forEach(async (audio) => {
         if (audio.exists()) {
             const audioItem: AudioItem = {
                 uuid: audio.data().uuid ?? "",
@@ -26,6 +26,7 @@ export const getAudio = async () => {
                     released: audio.data().released.toDate() ?? "",
                 },
             };
+
             audioList.push(audioItem);
         } else {
             console.error("No such document!");

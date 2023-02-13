@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AiFillCaretRight, AiOutlinePause } from "react-icons/ai";
 import { Scrubber } from "../../components/scrubber/Scrubber";
+import { Thumbnail } from "../../components/thumbnail/Thumbnail";
 import { AudioContext } from "../../contexts/audioContext";
 import { truncate } from "../../utils/textUtilities";
 import styles from "./MiniPlayer.module.scss";
@@ -19,11 +20,7 @@ export const MiniPlayer = () => {
             } flex justify-between fixed z-50 bottom-0 bg-white shadow-xl p-5`}
         >
             <div className={`${styles["thumb"]} relative`}>
-                <img
-                    src={audioContext.currentAudio.metadata.artworkUrl ?? ""}
-                    alt={audioContext.currentAudio.metadata.title ?? "Artwork"}
-                    className="w-full h-auto"
-                />
+                <Thumbnail />
                 <button
                     onClick={playAudioHandler}
                     className={`${styles["controls"]} absolute inset-0 w-full duration-300 p-5`}
