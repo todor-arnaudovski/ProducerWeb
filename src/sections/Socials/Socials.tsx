@@ -1,46 +1,51 @@
+import { useRef } from "react";
 import Background from "../../assets/images/section-socials.jpg";
-import { ButtonLink } from "../../components/buttonLink/ButtonLink";
-import styles from "./Socials.module.scss";
 import { socials } from "../../data/siteData";
+import { Parallax } from "react-scroll-parallax";
+import { Social } from "./Social";
+import { motion } from "framer-motion";
 
 export const Socials = () => {
+    const textContainerRef = useRef<HTMLDivElement>(null);
+
     return (
         <section className="py-20 pb-0 text-break">
             <div className="container">
-                <div className="line-y-dark text-center">
-                    <span className="block mb-2">Get Connected</span>
-                    <h2 className="font-bold lg:text-7xl">SOCIALS</h2>
+                <div ref={textContainerRef} className="line-y-dark text-center">
+                    <Parallax
+                        translateX={[-10, 0]}
+                        shouldAlwaysCompleteAnimation
+                        targetElement={textContainerRef.current ?? undefined}
+                    >
+                        <span className="block mb-2">Get Connected</span>
+                    </Parallax>
+                    <Parallax
+                        translateX={[10, 0]}
+                        shouldAlwaysCompleteAnimation
+                        targetElement={textContainerRef.current ?? undefined}
+                    >
+                        <h2 className="font-bold lg:text-7xl">SOCIALS</h2>
+                    </Parallax>
                 </div>
             </div>
             <div
-                className="text-white overlay-dark bg-fixed"
+                className="text-white overlay-dark bg-fixed no-repeat bg-cover"
                 style={{ backgroundImage: `url(${Background})` }}
             >
                 <div className="container">
                     <div className="grid lg:grid-cols-3">
-                        {socials.map((platform) => {
+                        {socials.map((platform, i) => {
                             return platform.isInSection ? (
-                                <div
+                                <motion.div
                                     key={platform.name}
-                                    className={`${styles["social"]} px-7 pb-7 md:px-10 md:pb-10 lg:pt-96`}
+                                    className="self-center"
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
+                                    transition={{ delay: 0.3 + i / 3 }}
+                                    viewport={{ once: true }}
                                 >
-                                    <div className="relative">
-                                        <h3
-                                            className={`${styles["medium-name"]} font-bold lg:text-3xl mb-3"`}
-                                        >
-                                            {platform.name}
-                                        </h3>
-                                        <div className={styles["hidden-items"]}>
-                                            <p className="mb-3">{platform.header}</p>
-                                            <ButtonLink
-                                                href={platform.url}
-                                                target={platform.url !== "#" ? "_blank" : "_top"}
-                                            >
-                                                {platform.cta}
-                                            </ButtonLink>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <Social platform={platform} />
+                                </motion.div>
                             ) : null;
                         })}
                     </div>

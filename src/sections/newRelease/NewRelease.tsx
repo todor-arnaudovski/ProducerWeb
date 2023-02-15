@@ -5,12 +5,12 @@ import img3 from "../../assets/images/round-img-3.jpg";
 import styles from "./NewRelease.module.scss";
 
 export const NewRelease = () => {
-    const { ref: leftCircleRef } = useParallax({ speed: 10, shouldAlwaysCompleteAnimation: true });
+    const { ref: leftCircleRef } = useParallax({ speed: 15, shouldAlwaysCompleteAnimation: true });
     const { ref: midCircleRef } = useParallax({
-        scale: [1.2, 0.8],
+        scale: [1.2, 1],
         shouldAlwaysCompleteAnimation: true,
     });
-    const { ref: rightCircleRef } = useParallax({ speed: 30, shouldAlwaysCompleteAnimation: true });
+    const { ref: rightCircleRef } = useParallax({ speed: 15, shouldAlwaysCompleteAnimation: true });
 
     return (
         <section className="py-32 bg-black">
