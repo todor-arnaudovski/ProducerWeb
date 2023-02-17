@@ -23,7 +23,7 @@ export const MiniPlayer = () => {
                 <Thumbnail />
                 <button
                     onClick={playAudioHandler}
-                    className={`${styles["controls"]} absolute inset-0 w-full duration-300 p-5`}
+                    className={`${styles["controls"]} absolute inset-0 w-full opacity-100 lg:opacity-0 lg:hover:opacity-100 lg:duration-300 p-5`}
                 >
                     {audioContext.isPlaying ? <AiOutlinePause /> : <AiFillCaretRight />}
                 </button>

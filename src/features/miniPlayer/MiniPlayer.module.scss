@@ -6,8 +6,6 @@
             transition: filter 0.3s ease-out;
         }
         & .controls {
-            opacity: 0;
-            transition: opacity 0.3s ease-out;
             & svg {
                 color: #fff;
                 width: 100%;
@@ -18,8 +16,10 @@
             & img {
                 filter: brightness(0.5);
             }
-            & .controls {
-                opacity: 1;
+        }
+        @media (max-width: 767px) {
+            & img {
+                filter: brightness(0.5);
             }
         }
         max-width: 80px;

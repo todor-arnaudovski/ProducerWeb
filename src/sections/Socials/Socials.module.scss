@@ -1,7 +1,13 @@
 .social {
-    border-left: 1px solid rgba(256, 256, 256, 0.5);
-    &:last-child {
-        border-right: 1px solid rgba(256, 256, 256, 0.5);
+    &:not(:last-child) {
+        border-bottom: 1px solid rgba(256, 256, 256, 0.5);
+    }
+    @media (min-width: 992px) {
+        border-bottom: none;
+        border-left: 1px solid rgba(256, 256, 256, 0.5);
+        &:last-child {
+            border-right: 1px solid rgba(256, 256, 256, 0.5);
+        }
     }
     -webkit-transition: 0.3s;
     transition: 0.3s;
@@ -21,14 +27,24 @@
     }
     &:hover {
         background-color: rgba(256, 256, 256, 0.05);
-        & .medium-name {
-            bottom: 90px;
-        }
         & .hidden-items {
             visibility: visible;
             opacity: 100%;
             filter: opacity(1);
             -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=NaN)";
+        }
+        & .medium-name {
+            bottom: 90px;
+        }
+        @media (min-width: 768px) {
+            & .medium-name {
+                bottom: 120px;
+            }
+        }
+        @media (min-width: 992px) {
+            & .medium-name {
+                bottom: 90px;
+            }
         }
     }
 }

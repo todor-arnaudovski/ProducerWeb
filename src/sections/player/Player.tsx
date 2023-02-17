@@ -10,7 +10,7 @@ import { Thumbnail } from "../../components/thumbnail/Thumbnail";
 import { Parallax } from "react-scroll-parallax";
 import { motion } from "framer-motion";
 
-export const Player = () => {
+export const Player = forwardRef((props: {}, ref: React.LegacyRef<HTMLElement> | undefined) => {
     const audioContext = useContext(AudioContext);
 
     const playAudioHandler = () => {
@@ -29,7 +29,8 @@ export const Player = () => {
 
     return (
         <section
-            className="bg-img bg-fade-top pt-36 pb-40"
+            ref={ref as React.RefObject<HTMLDivElement>}
+            className="bg-img bg-fade-top pt-36 pb-20"
             style={{ backgroundImage: `url('${Background}')` }}
         >
             <Parallax speed={30}>
@@ -41,7 +42,9 @@ export const Player = () => {
                     viewport={{ once: true }}
                 >
                     <div className={`${styles["player-container"]} container`}>
-                        <div className={`${styles["player"]} mx-auto text-center`}>
+                        <div
+                            className={`${styles["player"]} mx-auto text-center pt-28 pb-16 lg:pt-32 lg:pb-20`}
+                        >
                             <div
                                 className={`${styles["player-bg"]} bg-cover	bg-no-repeat bg-center blur`}
                                 style={{
@@ -62,7 +65,7 @@ export const Player = () => {
                                         {audioContext.currentAudio.metadata.released?.getFullYear()}
                                     </span>
                                 </div>
-                                <div className="py-10 lg:py-12 mx-12 text-white">
+                                <div className="py-10 lg:py-12 mx-8 lg:mx-12 text-white">
                                     <div
                                         className={`${styles["audio-controls"]} flex justify-between mb-7`}
                                     >
@@ -93,4 +96,4 @@ export const Player = () => {
             </Parallax>
         </section>
     );
-};
+});

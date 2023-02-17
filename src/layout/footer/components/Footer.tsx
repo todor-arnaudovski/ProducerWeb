@@ -2,15 +2,39 @@ import Logo from "../../../assets/logos/logo.png";
 import styles from "../assets/Footer.module.scss";
 import { socials, navLinks, email } from "../../../data/siteData";
 
-export const Footer = () => {
+interface FooterProps {
+    sectionRefs: React.RefObject<HTMLElement>[];
+}
+
+export const Footer = (props: FooterProps) => {
+    const { sectionRefs } = props;
+
+    const navLinkClickHandler = (e: React.MouseEvent<HTMLElement>, index: number) => {
+        e.preventDefault();
+        if (sectionRefs[index].current) {
+            const el = sectionRefs[index].current;
+            if (!el) return;
+            el.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+    };
+
+    const scrollToTopHandler = (e: React.MouseEvent<HTMLElement>) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+        });
+    };
+
     return (
         <footer className={`${styles["footer"]} bg-black text-white pt-28 pb-32`}>
             <div className="container text-center">
-                <a href="#" className="inline-block mb-5">
+                <a href="#" onClick={scrollToTopHandler} className="inline-block mb-5">
                     <img className={styles["logo"]} src={Logo} alt="Koldmane Logo" />
                 </a>
                 <div className={`${styles["icons-wrapper"]} mb-5`}>
-                    <ul className="flex justify-center">
+                    <ul className="flex justify-center flex-wrap">
                         {socials.map((platform, i) => {
                             return (
                                 <li key={i} className="text-3xl mx-2">
@@ -36,12 +60,16 @@ export const Footer = () => {
                     </a>
                 </div>
                 <div className="mb-5">
-                    <ul className="flex justify-center">
+                    <ul className="flex justify-center flex-wrap">
                         {navLinks.map((item, i) => {
                             return (
-                                <li key={`${item}-${i}`} className="px-5">
-                                    <a className="hover:text-rose-500 duration-300" href="#player">
-                                        {item}
+                                <li key={`${item.id}-${i}`} className="px-5">
+                                    <a
+                                        href="#"
+                                        onClick={(e) => navLinkClickHandler(e, i)}
+                                        className="hover:text-rose-500 duration-300"
+                                    >
+                                        {item.title}
                                     </a>
                                 </li>
                             );

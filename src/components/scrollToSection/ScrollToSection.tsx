@@ -36,8 +36,9 @@ export const ScrollToSection = (props: ScrollToSectionProps) => {
 
     const onClickHandler = () => {
         if (sectionRef.current) {
+            console.log("SCROLL TO", sectionRef.current.getBoundingClientRect().top);
             window.scrollTo({
-                top: sectionRef.current.getBoundingClientRect().top - 35,
+                top: sectionRef.current.getBoundingClientRect().top - 300,
                 left: 0,
                 behavior: "smooth",
             });

@@ -1,14 +1,18 @@
-import { useRef } from "react";
+import { forwardRef, useRef } from "react";
 import Logo from "../../assets/logos/logo.png";
 import Background from "../../assets/images/section-2.jpg";
 import { Parallax } from "react-scroll-parallax";
 import { motion } from "framer-motion";
 
-export const About = () => {
+export const About = forwardRef((props: {}, ref: React.LegacyRef<HTMLElement> | undefined) => {
     const textContainerRef = useRef<HTMLDivElement>(null);
 
     return (
-        <section className="py-20 text-white" style={{ backgroundImage: `url(${Background})` }}>
+        <section
+            ref={ref}
+            className="py-20 text-white"
+            style={{ backgroundImage: `url(${Background})` }}
+        >
             <div className="container">
                 <div ref={textContainerRef} className="line-y-white text-center">
                     <Parallax
@@ -23,17 +27,16 @@ export const About = () => {
                         shouldAlwaysCompleteAnimation
                         targetElement={textContainerRef.current ?? undefined}
                     >
-                        <h2 className="font-bold lg:text-7xl">ABOUT ME</h2>
+                        <h2 className="font-bold text-4xl lg:text-7xl">ABOUT ME</h2>
                     </Parallax>
                 </div>
                 <div className="lg:px-36 flex flex-col py-4">
                     <motion.div
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
-                        transition={{ delay: 0.3 }}
                         viewport={{ once: true }}
                     >
-                        <h3 className="font-bold lg:text-3xl mb-3">
+                        <h3 className="font-bold text-xl lg:text-3xl mb-3">
                             He heard something that he knew to be music
                         </h3>
                     </motion.div>
@@ -67,4 +70,4 @@ export const About = () => {
             </div>
         </section>
     );
-};
+});

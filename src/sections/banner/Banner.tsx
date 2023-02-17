@@ -4,8 +4,8 @@ import styles from "./Banner.module.scss";
 import { Parallax, useParallax } from "react-scroll-parallax";
 
 export const Banner = forwardRef(
-    (props: { spacingTop: number }, ref: React.LegacyRef<HTMLElement> | undefined) => {
-        const { spacingTop } = props;
+    (props: { headerHeight: number }, ref: React.LegacyRef<HTMLElement> | undefined) => {
+        const { headerHeight } = props;
         const { ref: overlayRef } = useParallax({
             opacity: [0, 1.5],
             shouldAlwaysCompleteAnimation: true,
@@ -13,27 +13,23 @@ export const Banner = forwardRef(
 
         return (
             <section
-                className="relative overflow-hidden py-48"
-                style={{ marginTop: `${spacingTop}px` }}
+                className={`${styles["banner"]} flex items-center relative overflow-hidden`}
+                style={{ marginTop: `${headerHeight + 5}px` }}
             >
                 <div
                     ref={overlayRef as React.RefObject<HTMLDivElement>}
                     className={styles["overlay"]}
-                    style={{
-                        marginTop: `-${spacingTop}px`,
-                        height: `calc(100% + ${spacingTop}px)`,
-                    }}
                 ></div>
                 <div className="container">
                     <div className="flex flex-col justify-center items-center">
-                        <div className="d-flex flex-column">
+                        <div className="d-flex flex-column max-w-full">
                             <Parallax
                                 scale={[1, 2.5]}
                                 opacity={[1, 0]}
                                 shouldAlwaysCompleteAnimation
                             >
                                 <h1
-                                    className="font-bold lg:text-9xl -skew-x-6 animated-background m-5"
+                                    className="font-bold text-7xl md:text-8xl lg:text-9xl -skew-x-6 animated-background m-3 lg:m-5"
                                     style={{ backgroundImage: `url(${Background})` }}
                                 >
                                     KLDMN

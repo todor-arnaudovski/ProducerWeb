@@ -7,6 +7,8 @@
         background-repeat: no-repeat;
         background-size: cover;
         &.mid {
+            min-height: 350px;
+            max-width: 300px;
             @media (min-width: 768px) {
                 min-height: 580px;
                 max-width: 580px;
@@ -24,9 +26,6 @@
                 min-height: 420px;
                 min-width: 420px;
             }
-            @media (max-width: 991px) {
-                display: none;
-            }
         }
         &.right {
             position: absolute;
@@ -36,9 +35,6 @@
                 min-height: 420px;
                 min-width: 420px;
             }
-            @media (max-width: 991px) {
-                display: none;
-            }
         }
     }
 }
@@ -46,6 +42,7 @@
     position: absolute;
     bottom: 50px;
     left: 1rem;
+    padding-right: 20%;
     @media (min-width: 768px) {
         padding-right: 30%;
     }

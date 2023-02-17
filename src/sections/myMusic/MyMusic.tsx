@@ -1,15 +1,15 @@
-import { useContext, useRef } from "react";
+import { forwardRef, useContext, useRef } from "react";
 import { AudioContext } from "../../contexts/audioContext";
 import { AudioCard } from "../../components/audioCard/AudioCard";
 import { Parallax } from "react-scroll-parallax";
 import { motion } from "framer-motion";
 
-export const MyMusic = () => {
+export const MyMusic = forwardRef((props: {}, ref: React.LegacyRef<HTMLElement> | undefined) => {
     const audioContext = useContext(AudioContext);
     const textContainerRef = useRef<HTMLDivElement>(null);
 
     return (
-        <section className="py-20">
+        <section ref={ref} className="py-20">
             <div className="container">
                 <div ref={textContainerRef} className="line-y-dark text-center">
                     <Parallax
@@ -24,10 +24,10 @@ export const MyMusic = () => {
                         shouldAlwaysCompleteAnimation
                         targetElement={textContainerRef.current ?? undefined}
                     >
-                        <h2 className="font-bold lg:text-7xl">MUSIC</h2>
+                        <h2 className="font-bold text-4xl lg:text-7xl">MUSIC</h2>
                     </Parallax>
                 </div>
-                <div className="grid lg:grid-cols-3 gap-x-5">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-5">
                     {audioContext.audioList &&
                         audioContext.audioList.length > 0 &&
                         audioContext.audioList.map((audio, i) => {
@@ -37,7 +37,7 @@ export const MyMusic = () => {
                                     className="self-center"
                                     initial={{ opacity: 0 }}
                                     whileInView={{ opacity: 1 }}
-                                    transition={{ delay: 0.3 + i / 3 }}
+                                    transition={{ delay: i / 3 }}
                                     viewport={{ once: true }}
                                 >
                                     <AudioCard data={audio} />
@@ -48,4 +48,4 @@ export const MyMusic = () => {
             </div>
         </section>
     );
-};
+});
