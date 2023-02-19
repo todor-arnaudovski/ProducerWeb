@@ -86,7 +86,7 @@ export const Header = forwardRef(
                         </button>
                         <div
                             className={`${styles["navbar-collapse"]} ${closedClass} flex flex-col lg:flex-row grow bg-white z-40 w-screen lg:w-auto h-screen lg:h-auto py-5 lg:py-0 px-0 shadow lg:shadow-none`}
-                            style={{ paddingTop: `${isMobile ? `${headerHeight}px` : ""}` }}
+                            style={{ paddingTop: isMobile ? "95px" : "" }}
                         >
                             <ConditionalWrapper
                                 condition={isMobile}
