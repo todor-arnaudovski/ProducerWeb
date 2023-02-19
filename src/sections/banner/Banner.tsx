@@ -2,19 +2,21 @@ import { forwardRef } from "react";
 import Background from "../../assets/images/header-background-3.jpg";
 import styles from "./Banner.module.scss";
 import { Parallax, useParallax } from "react-scroll-parallax";
+import { useIsMobile } from "../../hooks/useIsMobile";
 
 export const Banner = forwardRef(
     (props: { headerHeight: number }, ref: React.LegacyRef<HTMLElement> | undefined) => {
-        const { headerHeight } = props;
+        // const { headerHeight } = props;
         const { ref: overlayRef } = useParallax({
             opacity: [0, 1.5],
             shouldAlwaysCompleteAnimation: true,
         });
+        const isMobile = useIsMobile();
 
         return (
             <section
                 className={`${styles["banner"]} flex items-center relative overflow-hidden`}
-                style={{ marginTop: `${headerHeight + 5}px` }}
+                style={{ marginTop: isMobile ? "95px" : "105px" }}
             >
                 <div
                     ref={overlayRef as React.RefObject<HTMLDivElement>}

@@ -5,7 +5,6 @@ import styles from "./Preloader.module.scss";
 export const Preloader = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const audioContext = useContext(AudioContext);
-    console.log(isLoaded);
 
     useEffect(() => {
         let resourcePromises = [];
