@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { AudioContext } from "../../contexts/audioContext";
-import Spinner from "../../assets/loaders/spinner-200.svg";
+import Spinner from "../../assets/loaders/Spinner-200.svg";
 
 export const Thumbnail = () => {
     const audioContext = useContext(AudioContext);
