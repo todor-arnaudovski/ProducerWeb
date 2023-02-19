@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 import Logo from "../../../assets/logos/logo.png";
 
 import styles from "../assets/Header.module.scss";
@@ -36,15 +36,18 @@ export const Header = forwardRef(
             setIsNavbarOpen(!isNavbarOpen);
         };
 
-        const navLinkClickHandler = (e: React.MouseEvent<HTMLElement>, index: number) => {
-            e.preventDefault();
-            if (sectionRefs[index].current) {
-                const el = sectionRefs[index].current;
-                if (!el) return;
-                el.scrollIntoView({ behavior: "smooth", block: "center" });
-                setIsNavbarOpen(false);
-            }
-        };
+        const navLinkClickHandler = useCallback(
+            (e: React.MouseEvent<HTMLElement>, index: number) => {
+                e.preventDefault();
+                if (sectionRefs[index].current) {
+                    const el = sectionRefs[index].current;
+                    if (!el) return;
+                    el.scrollIntoView({ behavior: "smooth", block: "center" });
+                    setIsNavbarOpen(false);
+                }
+            },
+            [sectionRefs]
+        );
 
         const scrollToTopHandler = (e: React.MouseEvent<HTMLElement>) => {
             e.preventDefault();

@@ -1,6 +1,7 @@
 import Logo from "../../../assets/logos/logo.png";
 import styles from "../assets/Footer.module.scss";
 import { socials, navLinks, email } from "../../../data/siteData";
+import { useCallback } from "react";
 
 interface FooterProps {
     sectionRefs: React.RefObject<HTMLElement>[];
@@ -9,14 +10,17 @@ interface FooterProps {
 export const Footer = (props: FooterProps) => {
     const { sectionRefs } = props;
 
-    const navLinkClickHandler = (e: React.MouseEvent<HTMLElement>, index: number) => {
-        e.preventDefault();
-        if (sectionRefs[index].current) {
-            const el = sectionRefs[index].current;
-            if (!el) return;
-            el.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-    };
+    const navLinkClickHandler = useCallback(
+        (e: React.MouseEvent<HTMLElement>, index: number) => {
+            e.preventDefault();
+            if (sectionRefs[index].current) {
+                const el = sectionRefs[index].current;
+                if (!el) return;
+                el.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+        },
+        [sectionRefs]
+    );
 
     const scrollToTopHandler = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
