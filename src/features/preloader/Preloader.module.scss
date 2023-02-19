@@ -11,8 +11,8 @@
     -webkit-transition-delay: 1.5s;
     transition-delay: 1.5s;
     &.loaded {
-        -webkit-transform: translateX(-200%);
-        transform: translateX(-200%);
+        // -webkit-transform: translateX(-200%);
+        // transform: translateX(-200%);
         & .lines-wrapper {
             opacity: 0;
             filter: opacity(0);

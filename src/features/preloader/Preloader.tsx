@@ -5,6 +5,7 @@ import styles from "./Preloader.module.scss";
 export const Preloader = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const audioContext = useContext(AudioContext);
+    console.log(isLoaded);
 
     useEffect(() => {
         let resourcePromises = [];
@@ -38,8 +39,10 @@ export const Preloader = () => {
         });
     }, []);
 
+    if (isLoaded) return;
+
     return (
-        <div className={`${styles["preloader"]} ${styles[isLoaded ? "loaded" : ""]}`}>
+        <div className={`${styles["preloader"]} ${isLoaded && styles["loaded"]}`}>
             <div className={styles["lines-wrapper"]}>
                 <div className={`${styles["line"]} ${styles["line-1"]}`}></div>
                 <div className={`${styles["line"]} ${styles["line-2"]}`}></div>
