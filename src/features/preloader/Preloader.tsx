@@ -39,8 +39,6 @@ export const Preloader = () => {
         });
     }, []);
 
-    if (isLoaded) return;
-
     return (
         <div className={`${styles["preloader"]} ${isLoaded && styles["loaded"]}`}>
             <div className={styles["lines-wrapper"]}>
